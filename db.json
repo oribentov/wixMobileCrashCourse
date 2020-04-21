@@ -9,10 +9,17 @@
     },
     {
       "title": "Post 2",
-      "text": "Post 3 text",
+      "text": "Post 2 text",
       "author": "Author 2",
       "img": "https://picsum.photos/200/200/?image=187",
       "id": 2
+    },
+    {
+      "title": "Post num 3",
+      "text": "Import the ui-lib's TextField component. Use it to get a \"floating\" placeholder text for the title and to open a modal which will be used to write in the actual text of the blog post.",
+      "author": "Ori",
+      "img": "https://picsum.photos/200/200/?image=244",
+      "id": 16
     }
   ]
 }

@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
-import {StyleSheet, TextInput} from 'react-native';
-import {View, Text} from 'react-native-ui-lib';
+import {View, Text, TextField} from 'react-native-ui-lib';
 import {Navigation} from 'react-native-navigation';
 import PropTypes from 'prop-types';
 import * as postsActions from '../posts.actions';
@@ -102,21 +101,29 @@ class AddPost extends Component {
 
   render() {
     return (
-      <View style={styles.container}>
-        <Text style={styles.text}>This is AddPost screen</Text>
-        <TextInput
+      <View flex padding-24>
+        <Text text40 purple10 marginB-24>
+          Add Post
+        </Text>
+        <TextField
+          text70
+          floatingPlaceholder
           placeholder="Write a post title"
           onChangeText={this.onChangeTitle}
-          textAlign="center"
           value={this.state.title}
+          containerStyle={{marginBottom: 12}}
         />
-        <TextInput
+        <TextField
+          text70
+          floatingPlaceholder
+          expandable
           placeholder="Write a post text"
           onChangeText={this.onChangeText}
           textAlign="center"
           value={this.state.text}
         />
-        <TextInput
+        <TextField
+          floatingPlaceholder
           placeholder="Author name"
           onChangeText={this.onChangeAuthor}
           textAlign="center"
@@ -128,16 +135,3 @@ class AddPost extends Component {
 }
 
 export default AddPost;
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignContent: 'center',
-    justifyContent: 'center',
-  },
-  text: {
-    fontSize: 28,
-    textAlign: 'center',
-    margin: 10,
-  },
-});

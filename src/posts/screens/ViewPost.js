@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
-import {StyleSheet, Button} from 'react-native';
-import {View, Text} from 'react-native-ui-lib';
+import {StyleSheet} from 'react-native';
+import {View, Text, Button, Image, BorderRadiuses} from 'react-native-ui-lib';
 import {Navigation} from 'react-native-navigation';
 import PropTypes from 'prop-types';
 import {deletePost} from '../posts.actions/';
@@ -48,13 +48,26 @@ class ViewPost extends Component {
   };
 
   render() {
+    const {title, text, author, img} = this.props.post;
+
     return (
-      <View style={styles.container}>
-        <Text style={styles.text}>This is ViewPost screen</Text>
-        <Text style={styles.text}>{this.props.post.title}</Text>
+      <View flex spread padding-25>
+        <View>
+          <Image source={{uri: img}} style={styles.image} />
+          <Text text30 purple10>
+            {title}
+          </Text>
+          <Text text70 dark10 marginT-12>
+            {text}
+          </Text>
+          <Text marginT-24>Written by {author}</Text>
+        </View>
         <Button
-          title="Delete Post"
-          color="red"
+          label="Delete Post"
+          text80
+          red20
+          bg-red70
+          marginB-10
           onPress={this.onPostDeleteHandler}
         />
       </View>
@@ -71,14 +84,10 @@ function mapStateToProps(props) {
 export default connect(mapStateToProps)(ViewPost);
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignContent: 'center',
-    justifyContent: 'center',
-  },
-  text: {
-    fontSize: 28,
-    textAlign: 'center',
-    margin: 10,
+  image: {
+    width: '100%',
+    height: 70,
+    marginBottom: 20,
+    borderRadius: BorderRadiuses.br20,
   },
 });
