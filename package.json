@@ -7,13 +7,22 @@
     "ios": "react-native run-ios",
     "start": "react-native start",
     "test": "jest",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "fake-server": "json-server --watch db.json"
   },
   "dependencies": {
+    "@react-native-community/blur": "^3.6.0",
+    "@react-native-community/datetimepicker": "^2.3.2",
+    "@react-native-community/netinfo": "^5.7.1",
+    "lodash": "^4.17.15",
     "prop-types": "^15.7.2",
     "react": "16.11.0",
     "react-native": "0.62.2",
-    "react-native-navigation": "^6.4.0"
+    "react-native-gesture-handler": "^1.6.1",
+    "react-native-navigation": "^6.4.0",
+    "react-native-reanimated": "^1.8.0",
+    "react-native-ui-lib": "^5.6.1",
+    "remx": "^3.0.0-rc.15"
   },
   "devDependencies": {
     "@babel/core": "7.9.0",
