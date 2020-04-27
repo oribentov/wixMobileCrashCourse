@@ -1,8 +1,8 @@
+/* eslint-disable react-native/no-inline-styles */
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import {StyleSheet, TouchableOpacity, FlatList} from 'react-native';
+import {StyleSheet, FlatList} from 'react-native';
 import {
-  View,
   Text,
   Colors,
   BorderRadiuses,
@@ -37,6 +37,7 @@ class PostList extends Component {
           {
             id: 'addPost',
             text: 'Add',
+            testID: 'add-post-btn',
           },
         ],
       },
@@ -62,7 +63,8 @@ class PostList extends Component {
       activeBackgroundColor={Colors.purple70}
       activeOpacity={0.1}
       height={77.5}
-      onPress={() => this.pushViewPostScreen(item)}>
+      onPress={() => this.pushViewPostScreen(item)}
+      testID={`postItem-${item.id}`}>
       <ListItem.Part left>
         <Image source={{uri: item.img}} style={styles.image} />
       </ListItem.Part>
@@ -95,6 +97,7 @@ class PostList extends Component {
   render() {
     return (
       <FlatList
+        testID="posts-list"
         data={this.props.posts}
         keyExtractor={item => `{key-${item.id}`}
         renderItem={this.renderItem}

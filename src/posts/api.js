@@ -1,4 +1,3 @@
-import {postsStore} from './posts.store';
 import {Platform} from 'react-native';
 
 const url =
@@ -7,7 +6,8 @@ const url =
 export async function fetchPosts() {
   const response = await fetch(`${url}/posts`);
   const posts = await response.json();
-  postsStore.setPosts(posts);
+
+  return posts;
 }
 
 export async function addPost(post) {
@@ -20,8 +20,12 @@ export async function addPost(post) {
     body: JSON.stringify(post),
   });
 
+  if (!response.ok) {
+    throw new Error('Something went wrong while adding a post');
+  }
+
   const postToAdd = await response.json();
-  postsStore.addPost(postToAdd);
+  return postToAdd;
 }
 
 export async function deletePost(id) {
@@ -31,15 +35,11 @@ export async function deletePost(id) {
     });
 
     if (!response.ok) {
-      throw new Error('Something went wrong while deleting');
+      throw new Error('Something went wrong while deleting a post');
     }
-
-    postsStore.deletePost(id);
   } catch (err) {
     throw err;
   }
-
-  postsStore.deletePost(id);
 }
 
 export async function editPost(post) {
@@ -55,10 +55,9 @@ export async function editPost(post) {
     const postToUpdate = await response.json();
 
     if (!response.ok) {
-      throw new Error('Something went wrong while editing');
+      throw new Error('Something went wrong while editing a post');
     }
-
-    postsStore.editPost(postToUpdate);
+    return postToUpdate;
   } catch (err) {
     throw err;
   }

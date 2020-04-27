@@ -6,15 +6,19 @@
     "android": "react-native run-android",
     "ios": "react-native run-ios",
     "start": "react-native start",
-    "test": "jest",
+    "unit-test": "jest --watchAll --testPathIgnorePatterns=./e2e/*",
     "lint": "eslint .",
-    "fake-server": "json-server --watch db.json"
+    "fake-server": "json-server --watch db.json",
+    "start-e2e": "RN_SRC_EXT=e2e.js react-native start",
+    "e2e-test": "detox test"
   },
   "dependencies": {
     "@react-native-community/blur": "^3.6.0",
     "@react-native-community/datetimepicker": "^2.3.2",
     "@react-native-community/netinfo": "^5.7.1",
+    "detox-instruments-react-native-utils": "^3.0.1",
     "lodash": "^4.17.15",
+    "node-fetch": "^2.6.0",
     "prop-types": "^15.7.2",
     "react": "16.11.0",
     "react-native": "0.62.2",
@@ -29,12 +33,27 @@
     "@babel/runtime": "7.9.2",
     "@react-native-community/eslint-config": "0.0.5",
     "babel-jest": "24.9.0",
+    "detox": "^16.2.1",
     "eslint": "6.8.0",
-    "jest": "24.9.0",
+    "jest": "^24.9.0",
     "metro-react-native-babel-preset": "0.58.0",
+    "mocha": "^7.1.1",
     "react-test-renderer": "16.11.0"
   },
   "jest": {
     "preset": "react-native"
+  },
+  "detox": {
+    "configurations": {
+      "ios.sim.debug": {
+        "binaryPath": "ios/build/Build/Products/Debug-iphonesimulator/wixMobileCrashCourse.app",
+        "build": "xcodebuild -workspace ios/wixMobileCrashCourse.xcworkspace -scheme wixMobileCrashCourse -configuration Debug -sdk iphonesimulator -derivedDataPath ios/build",
+        "type": "ios.simulator",
+        "device": {
+          "type": "iPhone 11"
+        }
+      }
+    },
+    "test-runner": "mocha"
   }
 }

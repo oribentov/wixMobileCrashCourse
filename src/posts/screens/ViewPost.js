@@ -54,13 +54,15 @@ class ViewPost extends Component {
       <View flex spread padding-25>
         <View>
           <Image source={{uri: img}} style={styles.image} />
-          <Text text30 purple10>
+          <Text text30 purple10 testID="post-title">
             {title}
           </Text>
-          <Text text70 dark10 marginT-12>
+          <Text text70 dark10 marginT-12 testID="post-text">
             {text}
           </Text>
-          <Text marginT-24>Written by {author}</Text>
+          <Text marginT-24 testID="post-author">
+            Written by {author}
+          </Text>
         </View>
         <Button
           label="Delete Post"
@@ -69,6 +71,7 @@ class ViewPost extends Component {
           bg-red70
           marginB-10
           onPress={this.onPostDeleteHandler}
+          testID="delete-post-btn"
         />
       </View>
     );

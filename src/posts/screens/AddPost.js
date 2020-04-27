@@ -3,6 +3,7 @@ import {View, Text, TextField} from 'react-native-ui-lib';
 import {Navigation} from 'react-native-navigation';
 import PropTypes from 'prop-types';
 import * as postsActions from '../posts.actions';
+import * as Presenter from './AddPost.presenter';
 
 class AddPost extends Component {
   static propTypes = {
@@ -38,6 +39,7 @@ class AddPost extends Component {
           id: 'saveBtn',
           text: 'save',
           enabled: false,
+          testID: 'save-post-btn',
         },
       },
     };
@@ -52,24 +54,15 @@ class AddPost extends Component {
   };
 
   onSavePressed = () => {
-    const {postToUpdate} = this.props;
-    const {title, text, author} = this.state;
+    const {postToUpdate, componentId} = this.props;
 
-    Navigation.dismissModal(this.props.componentId);
-
-    if (postToUpdate) {
-      const post = {...postToUpdate, title, text, author};
-      postsActions.editPost(post);
-    } else {
-      const randomImageNumber = Math.floor(Math.random() * 500 + 1);
-
-      postsActions.addPost({
-        title: this.state.title,
-        text: this.state.text,
-        author: this.state.author,
-        img: `https://picsum.photos/200/200/?image=${randomImageNumber}`,
-      });
-    }
+    Presenter.onSavePressed({
+      componentId: componentId,
+      title: this.state.title,
+      text: this.state.text,
+      author: this.state.author,
+      postToUpdate,
+    });
   };
 
   enableSaveButton = () => {
@@ -79,6 +72,7 @@ class AddPost extends Component {
           id: 'saveBtn',
           text: 'save',
           enabled: true,
+          testID: 'save-post-btn',
         },
       },
     });
@@ -86,7 +80,7 @@ class AddPost extends Component {
 
   onChangeTitle = title => {
     this.setState({title});
-    this.enableSaveButton();
+    Presenter.onChangeTitle({componentId: this.props.componentId, title});
   };
 
   onChangeText = text => {
@@ -112,6 +106,7 @@ class AddPost extends Component {
           onChangeText={this.onChangeTitle}
           value={this.state.title}
           containerStyle={{marginBottom: 12}}
+          testID="title-input"
         />
         <TextField
           text70
